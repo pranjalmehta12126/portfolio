@@ -73,4 +73,28 @@ export function initialFX() {
       delay: 0.1,
     }
   );
+
+  gsap.fromTo(
+  ".landing-role-top",
+  { opacity: 0, y: 80 },
+  {
+    opacity: 1,
+    y: 10,
+    duration: 1,
+    ease: "power3.out",
+  }
+);
+
+gsap.fromTo(
+  ".landing-role-bottom",
+  { opacity: 0, y: 80 },
+  {
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    delay: 0.2,
+    ease: "power3.out",
+  }
+);
 }
+

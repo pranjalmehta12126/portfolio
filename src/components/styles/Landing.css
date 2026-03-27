@@ -222,7 +222,7 @@
   font-size: 32px;
   line-height: 40px;
   position: relative;
-  display: flex;
+  display: block !important;
   flex-wrap: nowrap;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -394,4 +394,33 @@ h2.landing-info-h2 {
   h2.landing-info-h2 {
     font-size: 75px;
   }
+}
+
+.landing-role-stack {
+  position: relative;
+  display: inline-block;
+}
+
+.landing-role-stack h2 {
+  margin: 0;
+  text-transform: uppercase;
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 0.9;
+}
+
+.landing-role-top {
+  font-size: 80px;
+  color: #8b5cf6; /* purple */
+  opacity: 0.9;
+  transform: translateY(10px);
+}
+
+.landing-role-bottom {
+  font-size: 75px;
+  color: #f3edf7;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
 }
