@@ -2,11 +2,14 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
+gsap.killTweensOf("*");
+
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
   split?: SplitText;
   isSplit?: boolean;
 }
+
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -16,7 +19,10 @@ export default function setSplitText() {
   if (window.innerWidth < 900) return;
 
   const paras: NodeListOf<ParaElement> = document.querySelectorAll(".para");
-  const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
+  // const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
+  const titles: NodeListOf<ParaElement> = document.querySelectorAll(
+  ".title:not(.landing-info-h2):not(.landing-h2-1):not(.landing-h2-2):not(.landing-h2-info):not(.landing-h2-info-1)"
+);
 
   const TriggerStart = window.innerWidth <= 1024 ? "top 60%" : "20% 60%";
   const ToggleAction = "play pause resume reverse";
