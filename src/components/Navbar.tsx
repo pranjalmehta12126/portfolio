@@ -2,43 +2,47 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import "./styles/Navbar.css";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-export let smoother: ScrollSmoother;
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   useEffect(() => {
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
-    });
+    const links = document.querySelectorAll(".header ul a");
 
-    smoother.scrollTop(0);
-    smoother.paused(true);
+    const handleClick = (e: Event) => {
+      if (window.innerWidth > 1024) {
+        e.preventDefault();
+        const elem = e.currentTarget as HTMLAnchorElement;
+        const section = elem.getAttribute("data-href");
 
-    let links = document.querySelectorAll(".header ul a");
-    links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+        if (section) {
+          const target = document.querySelector(section);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
         }
-      });
+      }
+    };
+
+    links.forEach((elem) => {
+      elem.addEventListener("click", handleClick);
     });
+
     window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
+      ScrollTrigger.refresh();
     });
+
+    return () => {
+      links.forEach((elem) => {
+        elem.removeEventListener("click", handleClick);
+      });
+      window.removeEventListener("resize", () => {
+        ScrollTrigger.refresh();
+      });
+    };
   }, []);
+
   return (
     <>
       <div className="header">
