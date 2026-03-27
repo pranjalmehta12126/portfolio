@@ -26,12 +26,3 @@
     max-width: var(--cWidth);
   }
 }
-.title,
-.para {
-  position: relative;
-  z-index: 2;
-}
-
-.split-line {
-  overflow: hidden;
-}

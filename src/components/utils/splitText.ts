@@ -2,7 +2,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
-gsap.killTweensOf("*");
 
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
