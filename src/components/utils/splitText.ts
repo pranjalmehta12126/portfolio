@@ -5,6 +5,7 @@ import { SplitText } from "gsap/SplitText";
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
   split?: SplitText;
+  isSplit?: boolean;
 }
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -20,17 +21,17 @@ export default function setSplitText() {
   const TriggerStart = window.innerWidth <= 1024 ? "top 60%" : "20% 60%";
   const ToggleAction = "play pause resume reverse";
 
-  paras.forEach((para: ParaElement) => {
+  paras.forEach((para) => {
     para.classList.add("visible");
-
-    if (para.anim) {
-      para.anim.kill();
-      para.anim = undefined;
-    }
 
     if (para.split) {
       para.split.revert();
       para.split = undefined;
+    }
+
+    if (para.anim) {
+      para.anim.kill();
+      para.anim = undefined;
     }
 
     para.split = new SplitText(para, {
@@ -56,20 +57,19 @@ export default function setSplitText() {
     );
   });
 
-  titles.forEach((title: ParaElement) => {
-    if (title.anim) {
-      title.anim.kill();
-      title.anim = undefined;
-    }
-
+  titles.forEach((title) => {
     if (title.split) {
       title.split.revert();
       title.split = undefined;
     }
 
+    if (title.anim) {
+      title.anim.kill();
+      title.anim = undefined;
+    }
+
     title.split = new SplitText(title, {
-      type: "chars,lines",
-      linesClass: "split-line",
+      type: "chars",
     });
 
     title.anim = gsap.fromTo(
