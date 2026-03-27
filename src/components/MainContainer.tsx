@@ -18,16 +18,18 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   );
 
   useEffect(() => {
-    const resizeHandler = () => {
-      setSplitText();
-      setIsDesktopView(window.innerWidth > 1024);
-    };
-    resizeHandler();
-    window.addEventListener("resize", resizeHandler);
-    return () => {
-      window.removeEventListener("resize", resizeHandler);
-    };
-  }, [isDesktopView]);
+  setSplitText(); // run ONLY once
+
+  const resizeHandler = () => {
+    setIsDesktopView(window.innerWidth > 1024);
+  };
+
+  window.addEventListener("resize", resizeHandler);
+
+  return () => {
+    window.removeEventListener("resize", resizeHandler);
+  };
+}, [isDesktopView]);
 
   return (
     <div className="container-main">
