@@ -412,7 +412,7 @@ h2.landing-info-h2 {
 
 .landing-role-top {
   font-size: 80px;
-  color: #5eead4;
+  color: #5eead4 !important;
   opacity: 0.9;
   transform: translateY(10px);
 }
